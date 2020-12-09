@@ -20,4 +20,8 @@ def poly_derivative(poly):
         if i == (len(poly) - 1):
             return [0]
 
-    return poly[1:]
+    for end in range(len(poly) - 1, 0, -1):
+        if poly[end] != 0:
+            break
+
+    return poly[1:end+1]
