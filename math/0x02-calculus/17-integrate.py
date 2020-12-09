@@ -26,4 +26,8 @@ def poly_integral(poly, C=0):
         if res[i] - int(res[i]) == 0.0:
             res[i] = int(res[i])
 
-    return res
+    for end in range(len(res) - 1, 0, -1):
+        if res[end] != 0:
+            break
+
+    return res[:end+1]
