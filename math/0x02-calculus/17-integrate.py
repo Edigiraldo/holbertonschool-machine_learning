@@ -19,7 +19,7 @@ def poly_integral(poly, C=0):
         if poly[i] != 0:
             break
         if i == (len(poly) - 1):
-            return [0]
+            return [C]
 
     res = [C] + poly
     for i in range(len(res)):
