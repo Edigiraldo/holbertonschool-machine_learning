@@ -4,6 +4,9 @@
 
 def poly_derivative(poly):
     """function that calculates the derivative of a polynomial."""
+    if type(poly) != list:
+        return None
+
     for ele in poly:
         if type(ele) != int and type(ele) != float:
             return None
