@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Poisson distribution."""
 
+e = 2.7182818285
+
 
 class Poisson:
     """Class Poisson that represents a poisson distribution."""
@@ -18,3 +20,17 @@ class Poisson:
                 raise ValueError("data must contain multiple values")
             self.data = data
             self.lambtha = sum(data)/len(data)
+
+    def pmf(self, k):
+        """Calculates the value of the PMF
+        for a given number of “successes”."""
+
+        if k < 0:
+            return 0
+        k = int(k)
+
+        kFactorial = 1
+        for i in range(k, 0, -1):
+            kFactorial *= i
+
+        return ((self.lambtha ** k) * (e ** (-self.lambtha))) / (kFactorial)
