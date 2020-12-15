@@ -31,10 +31,17 @@ class Normal:
 
     def pdf(self, x):
         """Calculates the value of the PDF for a given x-value."""
-        y = (-0.5) * ((x - self.mean) / self.stddev) ** 2
+        y = (-0.5) * ((x - self.mean) ** 2 / self.stddev ** 2)
         pdf = (e ** y) / (self.stddev * (2 * pi) ** 0.5)
 
         return pdf
+
+    def cdf(self, x):
+        """Calculates the value of the CDF for a given x-value."""
+        y = (x - self.mean) / ((2 ** 0.5) * self.stddev)
+        cdf = (1 + erf(y)) / 2
+
+        return cdf
 
 
 def standardev(data, mean):
@@ -47,3 +54,12 @@ def standardev(data, mean):
     dev /= len(data)
 
     return dev ** 0.5
+
+
+def erf(x):
+    """Error function."""
+    erf = x - (x ** 3) / 3 + (x ** 5) / 10 - (x ** 7) / 42 + (x ** 9) / 216
+    erf *= 2
+    erf /= pi ** 0.5
+
+    return erf
