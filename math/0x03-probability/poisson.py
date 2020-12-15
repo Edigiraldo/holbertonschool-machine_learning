@@ -24,13 +24,35 @@ class Poisson:
     def pmf(self, k):
         """Calculates the value of the PMF
         for a given number of “successes”."""
-
         if k < 0:
             return 0
         k = int(k)
 
-        kFactorial = 1
-        for i in range(k, 0, -1):
-            kFactorial *= i
+        return ((self.lambtha ** k) * (e ** (-self.lambtha))) / (factorial(k))
 
-        return ((self.lambtha ** k) * (e ** (-self.lambtha))) / (kFactorial)
+    def cdf(self, k):
+        """Calculates the value of the CDF
+        for a given number of “successes”."""
+        if k < 0:
+            return 0
+        k = int(k)
+
+        sum = 0
+        for i in range(0, k+1):
+            sum += (self.lambtha ** i) / factorial(i)
+
+        return (e ** (-self.lambtha)) * sum
+
+
+def factorial(n):
+    """Calculates n!"""
+
+    if type(n) != int or n < 0:
+        return None
+
+    fact = 1
+
+    for i in range(n, 0, -1):
+        fact *= i
+
+    return fact
