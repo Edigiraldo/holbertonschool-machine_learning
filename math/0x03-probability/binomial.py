@@ -44,7 +44,7 @@ class Binomial:
         k = int(k)
 
         cdf = 0
-        for x in range(0, k + 1):
+        for x in range(1, k + 1):
             cdf += self.pmf(x)
 
         return cdf
