@@ -19,7 +19,7 @@ class Binomial:
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
             mean = sum(data) / len(data)
-            
+
             self.p = float(1 - (variance(data) / mean))
             self.n = int(mean / self.p)
             self.p = float(mean/self.n)
