@@ -24,6 +24,18 @@ class Binomial:
             self.n = int(mean / self.p)
             self.p = float(mean/self.n)
 
+    def pmf(self, k):
+        """Calculates the value of the PMF
+        for a given number of “successes”."""
+        if k < 0:
+            return 0
+        k = int(k)
+
+        pmf = binomial_coef(self.n, k)
+        pmf *= (self.p ** k) * ((1 - self.p) ** (self.n - k))
+
+        return pmf
+
 
 def variance(data):
     """Computes the variance of a given distribution."""
@@ -34,3 +46,22 @@ def variance(data):
         var += (ele - mean) ** 2
 
     return var / len(data)
+
+
+def factorial(n):
+    """Calculates n!"""
+
+    if type(n) != int or n < 0:
+        return None
+
+    fact = 1
+
+    for i in range(n, 0, -1):
+        fact *= i
+
+    return fact
+
+
+def binomial_coef(n, k):
+    """Computes the binomial coeficient. n > k."""
+    return factorial(n) / (factorial(k) * factorial(n - k))
