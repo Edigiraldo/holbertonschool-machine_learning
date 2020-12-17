@@ -21,7 +21,7 @@ class Binomial:
             mean = sum(data) / len(data)
 
             self.p = float(1 - (variance(data) / mean))
-            self.n = int(mean / self.p)
+            self.n = round(mean / self.p)
             self.p = float(mean/self.n)
 
     def pmf(self, k):
