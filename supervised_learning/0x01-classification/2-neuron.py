@@ -20,10 +20,12 @@ class Neuron:
     def W(self):
         """getter for W private attribute."""
         return self.__W
+
     @property
     def b(self):
         """getter for b private attribute."""
         return self.__b
+
     @property
     def A(self):
         """getter for A private attribute."""
@@ -37,6 +39,7 @@ class Neuron:
         self.__A = sigmoid((W @ X) + b)
 
         return self.__A
+
 
 def sigmoid(z):
     """sigmoid function of np array."""
