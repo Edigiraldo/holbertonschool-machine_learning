@@ -87,7 +87,7 @@ class NeuralNetwork:
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         """Calculates one pass of gradient descent on the neural network."""
-        W2 = self.__W2
+        W2 = self.__W2.copy()
 
         dZ2 = A2 - Y
         self.__W2 -= alpha * dZ2 @ A1.T / Y.size
