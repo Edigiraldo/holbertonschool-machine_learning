@@ -94,7 +94,7 @@ class DeepNeuralNetwork:
         predict[predict < 0.5] = 0
         predict[predict >= 0.5] = 1
 
-        predicted = predicted.astype('int')
+        predict = predict.astype('int')
 
         return [predict, cost]
 
