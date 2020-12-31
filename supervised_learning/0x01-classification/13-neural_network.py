@@ -96,7 +96,7 @@ class NeuralNetwork:
         Z1 = self.__W1 @ X + self.__b1
         dZ1 = (W2.T @ dZ2) * (sigmoid(Z1) * (1 - sigmoid(Z1)))
         self.__W1 -= alpha * (dZ1 @ X.T) / Y.size
-        self.__b1 -= alpha * np.sum(dZ1, axis=1, keepdims=True)
+        self.__b1 -= alpha * np.sum(dZ1, axis=1, keepdims=True) / Y.size
 
 
 def sigmoid(z):
