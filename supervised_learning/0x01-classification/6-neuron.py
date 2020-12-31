@@ -55,6 +55,8 @@ class Neuron:
         predicted[A < 0.5] = 0
         predicted[A >= 0.5] = 1
 
+        predicted = predicted.astype('int')
+
         return [predicted, cost]
 
     def gradient_descent(self, X, Y, A, alpha=0.05):
