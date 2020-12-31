@@ -81,6 +81,8 @@ class NeuralNetwork:
         predicted[self.__A2 < 0.5] = 0
         predicted[self.__A2 >= 0.5] = 1
 
+        predicted = predicted.astype('int')
+
         return [predicted, cost]
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
