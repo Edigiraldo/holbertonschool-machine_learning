@@ -81,20 +81,21 @@ class NeuralNetwork:
         predicted[self.__A2 < 0.5] = 0
         predicted[self.__A2 >= 0.5] = 1
 
+        predicted = predicted.astype('int')
+
         return [predicted, cost]
 
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         """Calculates one pass of gradient descent on the neural network."""
-        W2 = self.__W2
+        W2 = self.__W2.copy()
 
         dZ2 = A2 - Y
         self.__W2 -= alpha * dZ2 @ A1.T / Y.size
         self.__b2 -= alpha * np.sum(dZ2, axis=1, keepdims=True) / Y.size
 
-        Z1 = self.__W1 @ X + self.__b1
-        dZ1 = (W2.T @ dZ2) * (sigmoid(Z1) * (1 - sigmoid(Z1)))
+        dZ1 = (W2.T @ dZ2) * (A1 * (1 - A1))
         self.__W1 -= alpha * (dZ1 @ X.T) / Y.size
-        self.__b1 -= alpha * np.sum(dZ1, axis=1, keepdims=True)
+        self.__b1 -= alpha * np.sum(dZ1, axis=1, keepdims=True) / Y.size
 
     def train(self, X, Y, iterations=5000, alpha=0.05):
         """Trains the neural network."""
