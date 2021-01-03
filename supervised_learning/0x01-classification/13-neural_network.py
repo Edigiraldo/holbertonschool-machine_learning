@@ -93,8 +93,6 @@ class NeuralNetwork:
         self.__W2 -= alpha * dZ2 @ A1.T / Y.size
         self.__b2 -= alpha * np.sum(dZ2, axis=1, keepdims=True) / Y.size
 
-        # Z1 = self.__W1 @ X + self.__b1
-        # dZ1 = (W2.T @ dZ2) * (sigmoid(Z1) * (1 - sigmoid(Z1)))
         dZ1 = (W2.T @ dZ2) * (A1 * (1 - A1))
         self.__W1 -= alpha * (dZ1 @ X.T) / Y.size
         self.__b1 -= alpha * np.sum(dZ1, axis=1, keepdims=True) / Y.size
