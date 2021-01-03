@@ -114,7 +114,9 @@ class DeepNeuralNetwork:
                 Aout = cache['A' + str(n_layers)]
                 dZl = Aout - Y
 
-            Wnl = Wl.copy()  # In next iteration current W's are W's from next layer.
+            Wnl = Wl.copy()  # In next iteration current W's
+                             # are W's from next layer.
+
             Wl -= alpha * (dZl @ Il.T) / Y.size
             bl -= alpha * np.sum(dZl, axis=1, keepdims=True) / Y.size
 
