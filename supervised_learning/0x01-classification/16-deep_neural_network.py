@@ -20,6 +20,8 @@ class DeepNeuralNetwork:
         self.cache = {}
         # A dictionary to hold all weights and biased of the network.
         self.weights = {}
+        # The number of layers in the neural network.
+        self.L = len(layers)
 
         for i in range(len(layers)):
 
@@ -39,6 +41,3 @@ class DeepNeuralNetwork:
             self.weights[nameW] = np.random.randn(neurons,
                                                   weights)*np.sqrt(2/weights)
             self.weights[nameb] = np.zeros((neurons, 1))
-
-        # The number of layers in the neural network.
-        self.L = len(layers)
