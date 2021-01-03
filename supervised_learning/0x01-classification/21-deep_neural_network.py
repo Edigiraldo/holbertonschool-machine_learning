@@ -106,16 +106,15 @@ class DeepNeuralNetwork:
             Il = cache['A' + str(i - 1)]  # Input for layer
             Wl = self.__weights['W' + str(i)]
             bl = self.__weights['b' + str(i)]
-            # Zl = Wl @ Il + bl
             Al = cache['A' + str(i)]
 
             if i != n_layers:
-                Wnl = self.__weights['W' + str(i + 1)]  # Weights next layer
                 dZl = (Wnl.T @ dZnl) * (Al * (1 - Al))
             else:
                 Aout = cache['A' + str(n_layers)]
                 dZl = Aout - Y
 
+            Wnl = Wl.copy()  # In next iteration current W's are W's from next layer.
             Wl -= alpha * (dZl @ Il.T) / Y.size
             bl -= alpha * np.sum(dZl, axis=1, keepdims=True) / Y.size
 
