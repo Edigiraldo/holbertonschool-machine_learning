@@ -27,7 +27,7 @@ class DeepNeuralNetwork:
 
             val = layers[i]
             if type(val) != int or val < 1:
-                raise ValueError("layers must be a list of positive integers")
+                raise TypeError("layers must be a list of positive integers")
 
             nameW = 'W' + str(i + 1)
             nameb = 'b' + str(i + 1)
