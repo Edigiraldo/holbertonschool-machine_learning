@@ -13,7 +13,7 @@ class DeepNeuralNetwork:
         if nx < 1:
             raise ValueError("nx must be a positive integer")
 
-        if type(layers) != list:
+        if type(layers) != list or len(layers) == 0:
             raise TypeError("layers must be a list of positive integers")
 
         # A dictionary to hold all intermediary values of the network.
