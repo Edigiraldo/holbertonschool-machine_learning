@@ -94,6 +94,8 @@ class DeepNeuralNetwork:
         predict[predict < 0.5] = 0
         predict[predict >= 0.5] = 1
 
+        predict = predict.astype('int')
+
         return [predict, cost]
 
     def gradient_descent(self, Y, cache, alpha=0.05):
