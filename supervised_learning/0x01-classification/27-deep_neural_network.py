@@ -98,7 +98,7 @@ class DeepNeuralNetwork:
         predict = A.copy()
         predict = np.max(predict, axis=0)
 
-        predict = np.where(A == Y_hat, 1, 0)
+        predict = np.where(A == predict, 1, 0)
 
         return [predict, cost]
 
