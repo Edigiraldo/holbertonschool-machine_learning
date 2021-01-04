@@ -1,4 +1,4 @@
-#!/usr/bin python3
+#!/usr/bin/env python3
 """One-Hot Encode."""
 import numpy as np
 
