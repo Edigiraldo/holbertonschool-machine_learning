@@ -10,7 +10,4 @@ def one_hot_encode(Y, classes):
             not isinstance(classes, int) or classes <= np.amax(Y)):
         return None
 
-    ohe = np.zeros((classes, Y.shape[0]))
-    ohe[Y, np.arange(classes)] = 1
-
-    return ohe
+    return np.eye(classes)[Y].T
