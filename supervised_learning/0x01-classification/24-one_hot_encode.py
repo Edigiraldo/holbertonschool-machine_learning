@@ -13,6 +13,6 @@ def one_hot_encode(Y, classes):
         return None
 
     ohe = np.zeros((classes, Y.shape[0]))
-    ohe[Y[:, np.newaxis], np.arange(classes)] = 1
+    ohe[Y, np.arange(classes)] = 1
 
     return ohe
