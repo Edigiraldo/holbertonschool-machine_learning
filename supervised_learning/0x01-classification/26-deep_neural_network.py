@@ -169,8 +169,8 @@ class DeepNeuralNetwork:
             plt.show()
 
         return self.evaluate(X, Y)
-    """
-    if not isinstance(iterations, int):
+        """
+        if not isinstance(iterations, int):
             raise TypeError("iterations must be an integer")
 
         if iterations <= 0:
