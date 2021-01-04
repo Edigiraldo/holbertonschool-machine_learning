@@ -180,10 +180,13 @@ class DeepNeuralNetwork:
     @staticmethod
     def load(filename):
         """Loads a pickled DeepNeuralNetwork object."""
-        with open(filename, 'rb') as file:
-            DeepNeuralNetwork = pickle.load(file)
+        try:
+            with open(filename, 'rb') as file:
+                DeepNeuralNetwork = pickle.load(file)
+            return DeepNeuralNetwork
 
-        return DeepNeuralNetwork
+        except FileNotFoundError:
+            return None
 
 
 def sigmoid(z):
