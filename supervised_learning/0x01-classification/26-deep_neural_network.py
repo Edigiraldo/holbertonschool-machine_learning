@@ -170,21 +170,18 @@ class DeepNeuralNetwork:
         return self.evaluate(X, Y)
 
     def save(self, filename):
-        """Saves the instance object to a file in pickle format."""
-        if filename[-4:] != ".pkl":
-            filename += ".pkl"
-
-        with open(filename, 'wb') as file:
-            pickle.dump(self, file)
+        """Method to save the weights of the NN."""
+        if not filename.endswith(".pkl"):
+            filename = filename + ".pkl"
+        with open(filename, 'wb') as f:
+            pickle.dump(self, f)
 
     @staticmethod
     def load(filename):
-        """Loads a pickled DeepNeuralNetwork object."""
+        """Method to load the weights of the NN."""
         try:
-            with open(filename, 'rb') as file:
-                DeepNeuralNetwork = pickle.load(file)
-            return DeepNeuralNetwork
-
+            with open(filename, 'rb') as f:
+                return pickle.load(f)
         except FileNotFoundError:
             return None
 
