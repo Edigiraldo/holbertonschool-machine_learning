@@ -86,7 +86,7 @@ class DeepNeuralNetwork:
     def cost(self, Y, A):
         """Calculates the cost of the model using logistic regression."""
         cost = - np.sum(Y * np.log(A))
-        cost /= Y.size[1]
+        cost /= Y.shape[1]
 
         return cost
 
