@@ -97,10 +97,8 @@ class DeepNeuralNetwork:
 
         predict = A.copy()
         predict = np.max(predict, axis=0)
-        predict[predict < 0.5] = 0
-        predict[predict >= 0.5] = 1
 
-        predict = predict.astype('int')
+        predict = np.where(A == Y_hat, 1, 0)
 
         return [predict, cost]
 
