@@ -95,8 +95,7 @@ class DeepNeuralNetwork:
         A, _ = self.forward_prop(X)
         cost = self.cost(Y, A)
 
-        predict = A.copy()
-        predict = np.max(predict, axis=0)
+        predict = np.max(A, axis=0)
 
         predict = np.where(A == predict, 1, 0)
 
