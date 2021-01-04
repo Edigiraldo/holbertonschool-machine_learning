@@ -199,6 +199,6 @@ def sigmoid(z):
 
 
 def softmax(x):
-        """Softmax function."""
-        e_x = np.exp(x - np.max(x))
-        return e_x / e_x.sum(axis=0)
+    """Softmax function."""
+    e_x = np.exp(x - np.max(x))
+    return e_x / e_x.sum(axis=0)
