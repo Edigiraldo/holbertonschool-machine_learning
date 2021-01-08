@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """train function."""
 import tensorflow as tf
-
-
 create_placeholders = __import__('0-create_placeholders').create_placeholders
 forward_prop = __import__('2-forward_prop').forward_prop
 calculate_accuracy = __import__('3-calculate_accuracy').calculate_accuracy
@@ -42,7 +40,7 @@ def train(X_train, Y_train, X_valid, Y_valid,
             accuracy_v, loss_value_v = sess.run((accuracy, loss),
                                                 feed_dict={x: X_valid,
                                                            y: Y_valid})
-            if i % 100 == 0:
+            if i % 100 == 0 or i == iterations:
                 print("After {} iterations:".format(i))
                 print("\tTraining Cost: {}".format(loss_value_t))
                 print("\tTraining Accuracy: {}".format(accuracy_t))
