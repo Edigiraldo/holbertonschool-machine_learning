@@ -36,8 +36,12 @@ def train(X_train, Y_train, X_valid, Y_valid,
     with tf.Session() as sess:
         sess.run(init)
         for i in range(iterations + 1):
-            accuracy_t, loss_value_t = sess.run((accuracy, loss), feed_dict={x: X_train, y: Y_train})
-            accuracy_v, loss_value_v = sess.run((accuracy, loss), feed_dict={x: X_valid, y: Y_valid})
+            accuracy_t, loss_value_t = sess.run((accuracy, loss),
+                                                feed_dict={x: X_train,
+                                                           y: Y_train})
+            accuracy_v, loss_value_v = sess.run((accuracy, loss),
+                                                feed_dict={x: X_valid,
+                                                           y: Y_valid})
             if i % 100 == 0:
                 print("After {} iterations:".format(i))
                 print("\tTraining Cost: {}".format(loss_value_t))
@@ -47,6 +51,6 @@ def train(X_train, Y_train, X_valid, Y_valid,
             if i < iterations:
                 sess.run(train_op, feed_dict={x: X_train, y: Y_train})
 
-        saver.save(sess, save_path)
+        save_path = saver.save(sess, save_path)
 
     return save_path
