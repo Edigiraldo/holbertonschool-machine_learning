@@ -10,6 +10,7 @@ def normalization_constants(X):
     stddev = X.std(axis=0)
 
     nx = X.shape[1]
+    X = X.copy()
 
     for i in range(nx):
         X[:, i] -= mean[i]
