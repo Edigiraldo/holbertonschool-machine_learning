@@ -3,7 +3,7 @@
 import tensorflow as tf
 shuffle_data = __import__('2-shuffle_data').shuffle_data
 
-
+'''
 def create_batch(X, batch_size):
     """Function to create batches from a data set."""
     m = X.shape[0]
@@ -25,6 +25,7 @@ def create_batch(X, batch_size):
         batches_list.append(X_mini)
 
     return batches_list
+'''
 
 
 def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
@@ -61,20 +62,35 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
             print("\tValidation Accuracy: {}".format(accuracy_v))
             if epoch < epochs:
                 X, Y = shuffle_data(X_train, Y_train)
-                batches_x = create_batch(X, batch_size)
-                batches_y = create_batch(Y, batch_size)
-                num_batches = len(batches_x)
-                for i in range(num_batches):
-                    step = i + 1
-                    b_x = batches_x[i]
-                    b_y = batches_y[i]
+                # batches_x = create_batch(X, batch_size)
+                # batches_y = create_batch(Y, batch_size)
+                m = X_train.shape[0]
+                step = 1
+                for i in range(0, m, batch_size):
+                    b_x = X[i: i + batch_size]
+                    b_y = Y[i: i + batch_size]
                     sess.run(train_op, feed_dict={x: b_x,
                                                   y: b_y})
                     if step % 100 == 0:
                         accuracy_t, loss_value_t = sess.run((accuracy, loss),
                                                             feed_dict={x: b_x,
                                                                        y: b_y})
-                        print("\tStep {}".format(i + 1))
+                        print("\tStep {}".format(step))
+                        print("\t\tCost: {}".format(loss_value_t))
+                        print("\t\tAccuracy: {}".format(accuracy_t))
+
+                    step += 1
+
+                if i + batch_size != m:
+                    b_x = X[i + batch_size: m]
+                    b_y = Y[i + batch_size: m]
+                    sess.run(train_op, feed_dict={x: b_x,
+                                                  y: b_y})
+                    if step % 100 == 0:
+                        accuracy_t, loss_value_t = sess.run((accuracy, loss),
+                                                            feed_dict={x: b_x,
+                                                                       y: b_y})
+                        print("\tStep {}".format(step))
                         print("\t\tCost: {}".format(loss_value_t))
                         print("\t\tAccuracy: {}".format(accuracy_t))
 
