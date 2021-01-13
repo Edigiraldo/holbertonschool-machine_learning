@@ -34,6 +34,7 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
     """Function that trains a loaded neural network
     model using mini-batch gradient descent."""
     saved = tf.train.import_meta_graph("{}.meta".format(load_path))
+    saver = tf.train.Saver()
     with tf.Session() as sess:
         saved.restore(sess, load_path)
 
@@ -74,5 +75,5 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
                         print("\t\tCost: {}".format(loss_value_t))
                         print("\t\tAccuracy: {}".format(accuracy_t))
 
-        save_path = saved.save(sess, save_path)
+        save_path = saver.save(sess, save_path)
         return save_path
