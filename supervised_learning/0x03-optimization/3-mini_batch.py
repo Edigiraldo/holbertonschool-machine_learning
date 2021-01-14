@@ -6,25 +6,20 @@ shuffle_data = __import__('2-shuffle_data').shuffle_data
 
 def create_batch(X, batch_size):
     """Function to create batches from a data set."""
+
+    batch_list = []
+    i = 0
     m = X.shape[0]
-    n_batches = int(m / batch_size)
+    batches = int(m / batch_size) + (m % batch_size > 0)
 
-    batches_list = []
-    for i in range(0, n_batches):
-        a = i * batch_size
-        b = a + batch_size
-        X_mini = X[a:b]
-        batches_list.append(X_mini)
+    for b in range(batches):
+        if b != batches - 1:
+            batch_list.append(X[i:(i + batch_size)])
+        else:
+            batch_list.append(X[i:])
+        i += batch_size
 
-    if m % batch_size != 0:
-        r = m % batch_size
-
-        a = n_batches * batch_size
-        b = a + r
-        X_mini = X[a:b]
-        batches_list.append(X_mini)
-
-    return batches_list
+    return batch_list
 
 
 def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
