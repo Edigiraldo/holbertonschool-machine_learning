@@ -29,7 +29,6 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
     """Function that trains a loaded neural network
     model using mini-batch gradient descent."""
     saved = tf.train.import_meta_graph("{}.meta".format(load_path))
-    saver = tf.train.Saver()
     with tf.Session() as sess:
         saved.restore(sess, load_path)
 
@@ -40,32 +39,27 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
         loss = tf.get_collection("loss")[0]
         train_op = tf.get_collection("train_op")[0]
 
-        for epoch in range(epochs + 1):
-            accuracy_t = sess.run(accuracy, feed_dict={x: X_train,
-                                                       y: Y_train})
-            loss_value_t = sess.run(loss, feed_dict={x: X_train,
-                                                     y: Y_train})
-            accuracy_v = sess.run(accuracy, feed_dict={x: X_valid,
-                                                       y: Y_valid})
-            loss_value_v = sess.run(loss, feed_dict={x: X_valid,
-                                                     y: Y_valid})
-            print("After {} epochs:".format(epoch))
+        for i in range(epochs + 1):
+            accuracy_t, loss_value_t = sess.run((accuracy, loss),
+                                                feed_dict={x: X_train,
+                                                           y: Y_train})
+            accuracy_v, loss_value_v = sess.run((accuracy, loss),
+                                                feed_dict={x: X_valid,
+                                                           y: Y_valid})
+            print("After {} epochs:".format(i))
             print("\tTraining Cost: {}".format(loss_value_t))
             print("\tTraining Accuracy: {}".format(accuracy_t))
             print("\tValidation Cost: {}".format(loss_value_v))
             print("\tValidation Accuracy: {}".format(accuracy_v))
-            if epoch < epochs:
+            if i < epochs:
                 X, Y = shuffle_data(X_train, Y_train)
                 batches_x = create_batch(X, batch_size)
                 batches_y = create_batch(Y, batch_size)
-                num_batches = len(batches_x)
-                for i in range(num_batches):
-                    step = i + 1
-                    b_x = batches_x[i]
+                for i, b_x in enumerate(batches_x):
                     b_y = batches_y[i]
                     sess.run(train_op, feed_dict={x: b_x,
                                                   y: b_y})
-                    if step % 100 == 0:
+                    if (i + 1) % 100 == 0 and i != 0:
                         accuracy_t, loss_value_t = sess.run((accuracy, loss),
                                                             feed_dict={x: b_x,
                                                                        y: b_y})
@@ -73,5 +67,5 @@ def train_mini_batch(X_train, Y_train, X_valid, Y_valid,
                         print("\t\tCost: {}".format(loss_value_t))
                         print("\t\tAccuracy: {}".format(accuracy_t))
 
-        save_path = saver.save(sess, save_path)
+        save_path = saved.save(sess, save_path)
         return save_path
