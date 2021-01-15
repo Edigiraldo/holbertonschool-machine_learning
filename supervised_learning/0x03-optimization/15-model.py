@@ -38,7 +38,8 @@ def create_layer(prev, n, activation):
 
 
 def forward_prop(x, layer_sizes, activations, epsilon=1e-8):
-    """Function that creates the forward propagation graph for the NN     Arguments."""
+    """Function that creates the forward propagation graph
+    for the NN Arguments."""
     for i in range(len(layer_sizes)):
         if i < len(layer_sizes) - 1:
             layer = create_batch_norm_layer(x, layer_sizes[i], activations[i],
