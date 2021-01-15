@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Function create_batch_norm_layer."""
+import tensorflow as tf
 
 
 def create_batch_norm_layer(prev, n, activation):
