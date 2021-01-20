@@ -8,11 +8,10 @@ def l2_reg_gradient_descent(Y, weights, cache, alpha, lambtha, L):
     network using gradient descent with L2 regularization."""
     m = Y.shape[1]
     weights_c = weights.copy()
-    for i in range(L, 0, -1):
-        w_k = 'W' + str(i)
-        b_k = 'b' + str(i)
-        a_k = 'A' + str(i)
-        A = cache[a_k]
+    for i in reversed(range(1, L + 1)):
+        w_k = "W{}".format(i)
+        b_k = "b{}".format(i)
+        A = cache['A{}'.format(i)]
         if i == L:
             dz = A - Y
         else:
