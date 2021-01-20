@@ -9,7 +9,7 @@ def l2_reg_cost(cost, lambtha, weights, L, m):
     regul_cost = 0
     for i in range(1, L + 1):
         Wn = weights['W' + str(i)]
-        regul_cost += np.sum(Wn ** 2)
+        regul_cost += np.linalg.norm(Wn)
 
     regul_cost *= lambtha / (2 * m)
 
