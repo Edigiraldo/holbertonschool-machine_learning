@@ -29,6 +29,6 @@ def dropout_forward_prop(X, weights, L, keep_prob):
 
 
 def softmax(x):
-        """Softmax."""
-        e_x = np.exp(x - np.max(x))
-        return e_x / e_x.sum(axis=0)
+    """Softmax."""
+    e_x = np.exp(x - np.max(x))
+    return e_x / e_x.sum(axis=0)
