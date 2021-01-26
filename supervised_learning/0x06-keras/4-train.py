@@ -4,7 +4,7 @@ import tensorflow.keras as K
 
 
 def train_model(network, data, labels, batch_size,
-                epochs, verbose=True, shuffle=False):
+                epochs, verbose=False, shuffle=False):
     """Function that trains a model using
     mini-batch gradient descent."""
     hist = network.fit(x=data,
