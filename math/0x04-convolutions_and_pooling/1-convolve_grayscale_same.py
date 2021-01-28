@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Function convolve_grayscale_valid."""
+"""Function convolve_grayscale_same."""
 import numpy as np
 
 
