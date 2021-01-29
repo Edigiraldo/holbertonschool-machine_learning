@@ -2,6 +2,7 @@
 """Function ."""
 import numpy as np
 
+
 def convolve_grayscale_padding(images, kernel, padding):
     """Function that performs a convolution
     on grayscale images with custom padding."""
