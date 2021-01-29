@@ -16,5 +16,5 @@ def load_config(filename):
     with a specific configuration."""
     with open(filename, "r") as f:
         config = f.read()
-        loaded_model =  K.models.model_from_json(config)
+        loaded_model = K.models.model_from_json(config)
     return loaded_model
