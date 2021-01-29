@@ -39,6 +39,6 @@ def train_model(network, data, labels, batch_size,
                        verbose=verbose,
                        shuffle=shuffle,
                        validation_data=validation_data,
-                       callbacks=[es, lrd])
+                       callbacks=cbacks)
 
     return hist
