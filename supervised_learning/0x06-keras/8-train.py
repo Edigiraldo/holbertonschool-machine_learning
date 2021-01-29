@@ -35,8 +35,8 @@ def train_model(network, data, labels, batch_size,
         cbacks.append(lrd)
 
     if save_best:
-        sbest = callbacks.ModelCheckpoint(filepath,
-                                          monitor='val_loss')
+        sbest = K.callbacks.ModelCheckpoint(filepath,
+                                            monitor='val_loss')
         cbacks.append(sbest)
 
     hist = network.fit(x=data,
