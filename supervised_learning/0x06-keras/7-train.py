@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Function train_model."""
-from tensorflow import keras as K
-# import tensorflow.keras as K
+import tensorflow.keras as K
 
 
 def train_model(network, data, labels, batch_size,
