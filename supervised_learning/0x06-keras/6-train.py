@@ -9,11 +9,12 @@ def train_model(network, data, labels, batch_size,
     """Function that trains a model using mini-batch gradient
     descent, to analyze validation data, and to train the model
     using early stopping."""
-    es = None
+    cbacks = []
     if validation_data is not None and early_stopping:
         es = K.callbacks.EarlyStopping(monitor='val_loss',
                                        mode='min',
                                        patience=patience)
+        cbacks.append(es)
 
     hist = network.fit(x=data,
                        y=labels,
@@ -22,6 +23,6 @@ def train_model(network, data, labels, batch_size,
                        verbose=verbose,
                        shuffle=shuffle,
                        validation_data=validation_data,
-                       callbacks=[es])
+                       callbacks=cbacks)
 
     return hist
