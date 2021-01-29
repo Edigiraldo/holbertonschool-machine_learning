@@ -1,4 +1,4 @@
-#!/usr/bin/env/python3
+#!/usr/bin/env python3
 """Functions save_config and load_config."""
 import tensorflow.keras as K
 
