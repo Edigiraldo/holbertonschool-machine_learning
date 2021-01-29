@@ -8,6 +8,7 @@ def save_model(network, filename):
     K.models.save_model(model=network,
                         filepath=filename)
 
+
 def load_model(filename):
     """Function that loads an entire model."""
     return K.models.load_model(filepath=filename)
