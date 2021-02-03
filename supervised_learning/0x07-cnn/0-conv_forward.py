@@ -29,11 +29,11 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
 
     for i in range(out_h):
         for j in range(out_w):
-            img = images_padded[:, i * sh: i * sh + kh,
-                                j * sw: j * sw + kw, :, np.newaxis]
-            out[:, i, j] = (W[np.newaxis, :] * img)\
-                .sum(axis=1).sum(axis=2).sum(axis=1)
             for k in range(nc):
+                img = images_padded[:, i * sh: i * sh + kh,
+                                     j * sw: j * sw + kw, :]
+                out[:, i, j, k] = (img * W[:, :, :, k]).sum(axis=(1, 2, 3))
+
                 out[:, i, j, k] = activation(out[:, i, j, k] + b[0, 0, 0, k])
 
     return out
