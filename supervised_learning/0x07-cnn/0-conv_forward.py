@@ -33,7 +33,7 @@ def conv_forward(A_prev, W, b, activation, padding="same", stride=(1, 1)):
                                 j * sw: j * sw + kw, :, np.newaxis]
             out[:, i, j] = (W[np.newaxis, :] * img)\
                 .sum(axis=1).sum(axis=2).sum(axis=1)
-
-    out = activation(out + b)
+            for k in range(nc):
+                out[:, i, j, k] = activation(out[:, i, j, k] + b[0, 0, 0, k])
 
     return out
