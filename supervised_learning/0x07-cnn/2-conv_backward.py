@@ -8,8 +8,7 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
     a convolutional layer of a neural network."""
     m_z, h_new, w_new, c_newz = dZ.shape
     m, h_prev, w_prev, c_prev = A_prev.shape
-    kh, kw = W.shape
-    c_prev, c_new = W.shape
+    kh, kw, c_prev, c_new = W.shape
 
     sh, sw = stride
     ph, pw = 0, 0
