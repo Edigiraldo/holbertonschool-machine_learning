@@ -25,8 +25,8 @@ def lenet5(x, y):
     D1 = tf.layers.Dense(units=120, kernel_initializer=Henormal,
                          activation=tf.nn.relu)(Flat)
     D2 = tf.layers.Dense(units=84, kernel_initializer=Henormal,
-                         activation=tf.nn.relu)(D2)
-    logits = tf.layers.Dense(units=10, kernel_initializer=Henormal)(D1)
+                         activation=tf.nn.relu)(D1)
+    logits = tf.layers.Dense(units=10, kernel_initializer=Henormal)(D2)
 
     y_pred = tf.nn.softmax(logits)
 
