@@ -31,13 +31,13 @@ def lenet5(x, y):
     y_pred = tf.nn.softmax(logits)
 
     loss = tf.losses.softmax_cross_entropy(onehot_labels=y,
-                                           logits=y_pred)
+                                           logits=logits)
 
     optimizer = tf.train.AdamOptimizer()
     train = optimizer.minimize(loss)
 
     y_true = tf.argmax(y, axis=1)
-    y_pred = tf.argmax(y_pred, axis=1)
+    y_pred = tf.argmax(logits, axis=1)
     acc = tf.reduce_mean(tf.cast(tf.equal(y_true, y_pred), dtype=tf.float32))
 
     return y_pred, train, loss, acc
