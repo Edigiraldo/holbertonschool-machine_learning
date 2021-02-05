@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Function conv_backward."""
+import numpy as np
 
 
 def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
