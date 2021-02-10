@@ -43,20 +43,6 @@ def inception_network():
     inception_4a = inception_block(max_pool3,
                                    [192, 96, 208, 16, 48, 64])
 
-    #  auxiliary output 1
-    x1 = K.layers.AveragePooling2D(pool_size=(5, 5),
-                                   strides=(3, 3))(inception_4a)
-    x1 = K.layers.Conv2D(filters=128,
-                         kernel_size=(1, 1),
-                         padding='same',
-                         activation='relu')(x1)
-    x1 = K.layers.Flatten()(x1)
-    x1 = K.layers.Dense(units=1024,
-                        activation='relu')(x1)
-    x1 = K.layers.Dropout(0.7)(x1)
-    x1 = K.layers.Dense(units=10,
-                        activation='softmax')(x1)
-
     inception_4b = inception_block(inception_4a,
                                    [160, 112, 224, 24, 64, 64])
 
@@ -65,20 +51,6 @@ def inception_network():
 
     inception_4d = inception_block(inception_4c,
                                    [112, 144, 288, 32, 64, 64])
-
-    #  auxiliary output 2
-    x2 = K.layers.AveragePooling2D(pool_size=(5, 5),
-                                   strides=(3, 3))(inception_4d)
-    x2 = K.layers.Conv2D(filters=128,
-                         kernel_size=(1, 1),
-                         padding='same',
-                         activation='relu')(x2)
-    x2 = K.layers.Flatten()(x2)
-    x2 = K.layers.Dense(units=1024,
-                        activation='relu')(x2)
-    x2 = K.layers.Dropout(0.7)(x2)
-    x2 = K.layers.Dense(units=10,
-                        activation='softmax')(x2)
 
     inception_4e = inception_block(inception_4d,
                                    [256, 160, 320, 32, 128, 128])
@@ -93,11 +65,12 @@ def inception_network():
     inception_5b = inception_block(inception_5a,
                                    [384, 192, 384, 48, 128, 128])
 
-    avg_pool = K.layers.GlobalAveragePooling2D()(inception_5b)
+    avg_pool = K.layers.AveragePooling2D(pool_size=(7, 7),
+                                         padding='same')(inception_5b)
     dropout = K.layers.Dropout(0.4)(avg_pool)
-    x = K.layers.Dense(units=10,
+    x = K.layers.Dense(units=1000,
                        activation='softmax')(dropout)
 
-    model = K.Model(inputs=X, outputs=[x, x1, x2])
+    model = K.Model(inputs=X, outputs=x)
 
     return model
