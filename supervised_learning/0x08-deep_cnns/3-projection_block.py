@@ -21,14 +21,6 @@ def projection_block(A_prev, filters, s=2):
     F11, F3, F12 = filters
     he_normal = K.initializers.he_normal()
 
-    # Starts path for shorcut connection.
-    scl = K.layers.Conv2D(filters=F12,
-                          strides=(s, s),
-                          kernel_size=(1, 1),
-                          padding='same',
-                          kernel_initializer=he_normal)(A_prev)
-    sclBN = K.layers.BatchNormalization(axis=-1)(scl)
-
     # Starts main path.
     l1x1 = K.layers.Conv2D(filters=F11,
                            strides=(s, s),
@@ -50,6 +42,14 @@ def projection_block(A_prev, filters, s=2):
                              padding='same',
                              kernel_initializer=he_normal)(Relu3x3)
     BN1x1_2 = K.layers.BatchNormalization(axis=-1)(l1x1_2)
+
+    # Starts path for shorcut connection.
+    scl = K.layers.Conv2D(filters=F12,
+                          strides=(s, s),
+                          kernel_size=(1, 1),
+                          padding='same',
+                          kernel_initializer=he_normal)(A_prev)
+    sclBN = K.layers.BatchNormalization(axis=-1)(scl)
 
     # Joining paths.
     shorcut = K.layers.Add()([BN1x1_2, sclBN])
