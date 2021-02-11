@@ -14,7 +14,7 @@ def identity_block(A_prev, filters):
              - F12 is the number of filters in the second 1x1 convolution.
     """
     F11, F3, F12 = filters
-    he_normal = K.initializers.VarianceScaling()
+    he_normal = K.initializers.he_normal()
 
     l1x1 = K.layers.Conv2D(filters=F11,
                            kernel_size=(1, 1),
