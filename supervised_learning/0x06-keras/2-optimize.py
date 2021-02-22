@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Function optimize_model."""
-import tensorflow.keras as K
+from tensorflow import keras as K
+#import tensorflow.keras as K
 
 
 def optimize_model(network, alpha, beta1, beta2):

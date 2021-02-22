@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Function one_hot."""
-import tensorflow.keras as K
+from tensorflow import keras as K
+#import tensorflow.keras as K
 
 
 def one_hot(labels, classes=None):

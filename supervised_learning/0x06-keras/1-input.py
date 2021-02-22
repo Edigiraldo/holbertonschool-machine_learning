@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Function build_model."""
-import tensorflow.keras as K
-
+#import tensorflow.keras as K
+from tensorflow import keras as K
 
 def build_model(nx, layers, activations, lambtha, keep_prob):
     """Function that builds a neural
