@@ -26,9 +26,9 @@ class Yolo:
                  for each prediction.
                - 2 => [anchor_box_width, anchor_box_height].
         """
-        custom_objects={'GlorotUniform': K.initializers.glorot_uniform()}
+        custom_objects = {'GlorotUniform': K.initializers.glorot_uniform()}
         self.model = K.models.load_model(model_path, custom_objects)
-        self.class_names = open(classes_path,'r').read().splitlines()
+        self.class_names = open(classes_path, 'r').read().splitlines()
         self.class_t = class_t
         self.nms_t = nms_t
         self.anchors = anchors
