@@ -73,18 +73,25 @@ class Yolo:
                     boxes[i, j, :, 0] = (sigmoid(output[i, j, :, 0]) + cx) / gw
                     boxes[i, j, :, 1] = (sigmoid(output[i, j, :, 1]) + cy) / gh
 
-            print(self.model.input.shape[1].value)
-            print(self.model.input.shape[2].value)
-            boxes[:, :, :, 2] = anchor_sizes[:, 0] * np.exp(output[:, :, :, 2]) / self.model.input.shape[1].value
-            boxes[:, :, :, 3] = anchor_sizes[:, 1] * np.exp(output[:, :, :, 3]) / self.model.input.shape[2].value
+            inp_h = self.model.input.shape[1].value
+            inp_w = self.model.input.shape[2].value
+            pw = anchor_sizes[:, 0]
+            ph = anchor_sizes[:, 1]
+            boxes[:, :, :, 2] = pw * np.exp(output[:, :, :, 2]) / inp_w
+            boxes[:, :, :, 3] = ph * np.exp(output[:, :, :, 3]) / inp_h
 
             coordinates = np.zeros(boxes.shape)
             coordinates[:, :, :, :] = boxes[:, :, :, :]
 
-            coordinates[:, :, :, 0] = (boxes[:, :, :, 0] - boxes[:, :, :, 2] / 2) * img_w
-            coordinates[:, :, :, 1] = (boxes[:, :, :, 1] - boxes[:, :, :, 3] / 2) * img_h
-            coordinates[:, :, :, 2] = (boxes[:, :, :, 0] + boxes[:, :, :, 2] / 2) * img_w
-            coordinates[:, :, :, 3] = (boxes[:, :, :, 1] + boxes[:, :, :, 3] / 2) * img_h
+            bx = boxes[:, :, :, 0]
+            by = boxes[:, :, :, 1]
+            bw = boxes[:, :, :, 2]
+            bh = boxes[:, :, :, 3]
+
+            coordinates[:, :, :, 0] = (bx - bw / 2) * img_w
+            coordinates[:, :, :, 1] = (by - bh / 2) * img_h
+            coordinates[:, :, :, 2] = (bx + bw / 2) * img_w
+            coordinates[:, :, :, 3] = (by + bh / 2) * img_h
 
             processed[0].append(coordinates)
             processed[1].append(box_confidences)
@@ -95,4 +102,4 @@ class Yolo:
 
 def sigmoid(x):
     """Sigmoid function."""
-    return 1 / (1 + np.exp(-x)) 
+    return 1 / (1 + np.exp(-x))
