@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """Class Yolo."""
 import tensorflow.keras as K
-from tensorflow import keras as K
-
+import numpy as np
 
 class Yolo:
     """Class Yolo that uses the Yolo v3 algorithm
