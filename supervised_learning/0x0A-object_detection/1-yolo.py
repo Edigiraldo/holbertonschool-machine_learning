@@ -73,8 +73,8 @@ class Yolo:
                     boxes[i, j, :, 0] = (sigmoid(output[i, j, :, 0]) + cx) / gw
                     boxes[i, j, :, 1] = (sigmoid(output[i, j, :, 1]) + cy) / gh
 
-            inp_h = self.model.input.shape[1].value
-            inp_w = self.model.input.shape[2].value
+            inp_h = self.model.input.shape[2].value
+            inp_w = self.model.input.shape[1].value
             pw = anchor_sizes[:, 0]
             ph = anchor_sizes[:, 1]
             boxes[:, :, :, 2] = pw * np.exp(output[:, :, :, 2]) / inp_w
