@@ -15,7 +15,7 @@ def definiteness(matrix):
     if (matrix.ndim != 2 or
        matrix.shape[0] != matrix.shape[1] or
        matrix.shape[1] == 0 or
-       (np.matrix.conjugate(matrix.T) != matrix).all()):
+       (np.matrix.conjugate(matrix.T) != matrix).any()):
 
         return None
 
