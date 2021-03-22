@@ -27,6 +27,6 @@ def mean_cov(X):
     mean = np.mean(X, axis=0)
     X_norm = X - mean
 
-    cov = (X_norm.T @ X_norm) / n
+    cov = (X_norm.T @ X_norm) / (n - 1)
 
     return mean, cov
