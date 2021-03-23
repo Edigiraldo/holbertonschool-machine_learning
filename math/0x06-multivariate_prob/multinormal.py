@@ -45,6 +45,6 @@ class MultiNormal:
         x_norm = x - self.mean
 
         z = -0.5 * (x_norm.T @ cov_inv @ x_norm)
-        pdf = np.exp(z) / np.sqrt(((2 * np.pi) ** d) * cov_det)
+        pdf = np.exp(z)[0][0] / np.sqrt(((2 * np.pi) ** d) * cov_det)
 
-        return pdf[0][0]
+        return pdf
