@@ -34,6 +34,11 @@ class MultiNormal:
 
         Returns the value of the PDF.
         """
+        if type(x) is not np.ndarray:
+            raise TypeError("x must be a numpy.ndarray")
+        if x.ndim != 2 or x.shape != (self.cov.shape[0], 1):
+            raise ValueError("x must have the shape ({d}, 1)")
+
         cov_inv = np.linalg.inv(self.cov)
         cov_det = np.linalg.det(self.cov)
         d = self.cov.shape[0]
