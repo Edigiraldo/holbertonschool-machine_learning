@@ -25,3 +25,21 @@ class MultiNormal:
         data_norm = (data - self.mean).T
 
         self.cov = (data_norm.T @ data_norm) / (n - 1)
+
+    def pdf(self, x):
+        """
+        - x is a numpy.ndarray of shape (d, 1) containing
+          the data point whose PDF should be calculated.
+            - d is the number of dimensions of the Multinomial instance.
+
+        Returns the value of the PDF.
+        """
+        cov_inv = np.linalg.inv(self.cov)
+        cov_det = np.linalg.det(self.cov)
+        d = self.cov.shape[0]
+        x_norm = x - self.mean
+
+        z = -0.5 * (x_norm.T @ cov_inv @ x_norm)
+        pdf = np.exp(z) / np.sqrt(((2 * np.pi) ** d) * cov_det)
+
+        return pdf[0][0]
