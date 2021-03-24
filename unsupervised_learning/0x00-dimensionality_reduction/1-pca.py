@@ -19,6 +19,6 @@ def pca(X, ndim):
     U, S, Vh = np.linalg.svd(X_m)
 
     T = U[:, :ndim] @ np.diag(S)[:ndim, :ndim]
-   # T = X_m @ Vh.T[:, :ndim]
+    # T = X_m @ Vh.T[:, :ndim]
 
     return T
