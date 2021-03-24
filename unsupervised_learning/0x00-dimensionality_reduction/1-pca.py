@@ -16,8 +16,9 @@ def pca(X, ndim):
              containing the transformed version of X.
     """
     X_m = X - np.mean(X, axis=0)
-    U, S, Vh = np.linalg.svd(X_m, full_matrices=False)
+    U, S, Vh = np.linalg.svd(X_m)
 
     T = U[:, :ndim] @ np.diag(S)[:ndim, :ndim]
+   # T = X_m @ Vh.T[:, :ndim]
 
     return T
