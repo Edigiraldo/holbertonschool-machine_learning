@@ -15,7 +15,8 @@ def pca(X, ndim):
     Returns: T, a numpy.ndarray of shape (n, ndim)
              containing the transformed version of X.
     """
-    U, S, Vh = np.linalg.svd(X, full_matrices=False)
+    X_m = X - np.mean(X, axis=0)
+    U, S, Vh = np.linalg.svd(X_m, full_matrices=False)
 
     T = U[:, :ndim] @ np.diag(S)[:ndim, :ndim]
 
