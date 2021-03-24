@@ -14,11 +14,20 @@ def pca(X, ndim):
 
     Returns: T, a numpy.ndarray of shape (n, ndim)
              containing the transformed version of X.
-    """
     X_m = X - np.mean(X, axis=0)
     U, S, Vh = np.linalg.svd(X_m)
 
     T = U[:, :ndim] @ np.diag(S)[:ndim, :ndim]
     # T = X_m @ Vh.T[:, :ndim]
+    """
+    X = X - np.mean(X, axis=0)
+    _, S, V = np.linalg.svd(X)
+    idx = S.argsort()[::-1]
+    eig_val = S[idx]
+    eig_vect = V.T
+    eig_vect = eig_vect[:, idx]
+
+    w = eig_vect[:, 0: ndim]
+    T = np.matmul(X, w)
 
     return T
