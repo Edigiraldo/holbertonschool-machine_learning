@@ -93,7 +93,7 @@ def kmeans(X, k, iterations=1000):
                 C[j] = mean_j
                 C_changed = True
 
-        if C_changed == False:
+        if not C_changed:
             break
 
     return C, clss
