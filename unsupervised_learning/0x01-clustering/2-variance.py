@@ -36,7 +36,7 @@ def variance(X, C):
     Returns: var, or None on failure.
     """
     if (type(X) != np.ndarray or X.ndim != 2 or
-       type(C) != np.ndarray or X.ndim != 2):
+       type(C) != np.ndarray or C.ndim != 2):
         return None
 
     n = X.shape[0]
