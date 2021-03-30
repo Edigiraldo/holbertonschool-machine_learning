@@ -25,7 +25,7 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
           from the smallest cluster size for each cluster size.
     """
     if (type(kmin) is not int or kmin < 1 or
-       type(kmax) is not int or kmax < 1 or kmin >= kmax)
+       type(kmax) is not int or kmax < 1 or kmin >= kmax):
         return None, None
 
     results = []
