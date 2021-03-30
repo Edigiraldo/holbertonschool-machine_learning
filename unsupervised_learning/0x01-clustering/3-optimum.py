@@ -23,6 +23,9 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
           for each cluster size.
         - d_vars is a list containing the difference in variance
           from the smallest cluster size for each cluster size.
+
+    variances = [abs(variances[i] - variances[0])
+                 for i in range(len(variances))]
     """
     if (type(kmin) is not int or kmin < 1 or
        type(kmax) is not int or kmax < 1 or kmin >= kmax):
@@ -30,6 +33,7 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
 
     results = []
     variances = []
+    d_vars = []
     for k in range(kmin, kmax + 1):
         C, clss = kmeans(X, k, iterations)
         if C is None or clss is None:
@@ -40,7 +44,8 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
             return None, None
         variances.append(var)
 
-    variances = [abs(variances[i] - variances[0])
-                 for i in range(len(variances))]
+    var_k1 = variances[0]
+    for i in range(len(variances)):
+        d_vars.append(var_k1 - variances[i])
 
-    return results, variances
+    return results, d_vars
