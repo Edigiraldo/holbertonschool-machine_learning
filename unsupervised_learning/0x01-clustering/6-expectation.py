@@ -27,7 +27,7 @@ def expectation(X, pi, m, S):
     n, d = X.shape
 
     if (type(m) is not np.ndarray or m.ndim != 2 or
-        m.shape[1] != d):
+       m.shape[1] != d):
         return None, None
     k = m.shape[0]
 
@@ -52,6 +52,3 @@ def expectation(X, pi, m, S):
     ll = np.sum(np.log(g.sum(axis=0)))
 
     return gama_kn, ll
-
-    g = pi * P
-    
