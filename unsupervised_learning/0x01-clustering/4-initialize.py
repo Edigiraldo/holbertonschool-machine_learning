@@ -19,23 +19,22 @@ def initialize(X, k):
         - S is a numpy.ndarray of shape (k, d, d) containing the
           covariance matrices for each cluster, initialized as
           identity matrices.
-    """
-    if (type(X) != np.ndarray or X.ndim != 2 or type(k) is not int
-       or k < 1 or X.shape[0] < k):
-        return None, None, None
-
-    n = X.shape[0]
-    kmeans(X, k, iterations=1000)
-    idxs = np.random.choice(n, size=k, replace=False)
-
-    pi = np.ones(k) / k
-    m = X[idxs].copy()
-
     m_d = m[:, np.newaxis, :]
     X_d = X[np.newaxis, :, :]
 
     norm = X_d - m_d
     normT = np.transpose(norm, (0, 2, 1))
     S = (normT @ norm) / (n - 1)
+    """
+    if (type(X) != np.ndarray or X.ndim != 2 or type(k) is not int
+       or k < 1 or X.shape[0] < k):
+        return None, None, None
+
+    n, d = X.shape
+
+    pi = np.ones(k) / k
+    m, _ = kmeans(X, k)
+    S = np.zeros((k, d, d))
+    S[:] = np.identity(d)
 
     return pi, m, S
