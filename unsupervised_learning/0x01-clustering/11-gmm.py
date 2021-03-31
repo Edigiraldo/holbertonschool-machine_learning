@@ -19,7 +19,7 @@ def gmm(X, k):
           the covariance matrices.
         - clss is a numpy.ndarray of shape (n,) containing the
           cluster indices for each data point.
-        - bic is a numpy.ndarray of shape (kmax - kmin + 1) 
+        - bic is a numpy.ndarray of shape (kmax - kmin + 1)
           containing the BIC value for each cluster size tested.
     """
     Gmm = sklearn.mixture.GaussianMixture(k)
