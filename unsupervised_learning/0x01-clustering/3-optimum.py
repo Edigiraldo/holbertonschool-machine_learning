@@ -27,6 +27,9 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     variances = [abs(variances[i] - variances[0])
                  for i in range(len(variances))]
     """
+    if kmax is None:
+        kmax = kmin + 3
+
     if (type(kmin) is not int or kmin < 1 or
        type(kmax) is not int or kmax < 1 or kmin >= kmax):
         return None, None
