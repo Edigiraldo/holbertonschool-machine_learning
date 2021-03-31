@@ -27,6 +27,10 @@ def maximization(X, g):
     if (type(g) is not np.ndarray or g.ndim != 2 or
        g.shape[1] != n):
         return None, None, None
+
+    if not np.isclose(np.sum(g, axis=0), 1).all():
+        return (None, None, None)
+
     k = g.shape[0]
 
     pi = np.sum(g, axis=1) / n
