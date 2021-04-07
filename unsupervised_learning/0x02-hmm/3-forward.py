@@ -49,12 +49,11 @@ def forward(Observation, Emission, Transition, Initial):
        Initial.shape != (N, 1)):
         return None, None
 
-    # Obs.  (T) -> x1, ..., xT (xi E [1, 2, ..., M])
-    # Emis. (N, M)   -> P(xi|zi) (N ~ z, M ~ x, T ~ i, xi E [1, 2, ..., M])
-    # Trans. (N, N)  -> P(zk, zm) (k, m) E [1, ..., N] zi E [1, ..., N]
-    # Initial. (N, 1)-> P(zi)
-    # F[i, j] = P(zj=i|Obs[T=j]) ((i, j) E [1, ..., N])
-    # F[i, 1] = P(z1=i) * P(x1=Obs[1]|z1=i)
+    # Obs.  (T) -> x1, ..., xT (xt E [1, 2, ..., M], t E [1, ..., T])
+    # Emis. (N, M)   -> P(xt=j|zt=i) (xt E [1, ..., M], zt E [1, ..., N])
+    # Trans. (N, N)  -> P(zt+1=j|zt=i) (zt E [1, ..., N])
+    # Initial. (N, 1)-> z1
+    # F[i, t] = P(zt=i|Obs[t]) (i E [1, ..., N], t E [1, ..., T])
     F = np.zeros((N, T))
     F[:, 0] = Initial.T * Emission[:, Observation[0]]
     for i in range(1, T):
