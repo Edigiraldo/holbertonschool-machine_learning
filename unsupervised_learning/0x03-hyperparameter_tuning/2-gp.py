@@ -53,9 +53,9 @@ class GaussianProcess:
           the new sample function value.
         - Updates the public instance attributes X, Y, and K.
         """
-        self.K = self.kernel(self.X, self.X)
         self.X = np.append(self.X, [X_new], axis=0)
         self.Y = np.append(self.Y, [Y_new], axis=0)
+        self.K = self.kernel(self.X, self.X)
 
     def kernel(self, X1, X2):
         """
