@@ -60,7 +60,8 @@ class BayesianOptimization:
             # u(x) - f(x+) - xsi
             num = mu - max_val - self.xsi
 
-        Z = num.astype(float) / sigma.astype(float)
+        with np.errstate(divide='ignore'):
+            Z = num.astype(float) / sigma.astype(float)
         # zero division handling
         Z[Z == np.inf] = 0
 
