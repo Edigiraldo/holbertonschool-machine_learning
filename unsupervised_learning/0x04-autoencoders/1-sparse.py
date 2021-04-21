@@ -22,21 +22,18 @@ def autoencoder(input_dims, hidden_layers, latent_dims, lambtha):
         - decoder is the decoder model.
         - auto is the sparse autoencoder model.
     """
-    L1 = keras.regularizers.l1(lambtha)
-
     encoder_In = keras.Input(shape=(input_dims,))
     encoder = encoder_In
     for nodes in hidden_layers:
-        encoder = keras.layers.Dense(nodes, activation='relu',
-                                     activity_regularizer=L1)(encoder)
+        encoder = keras.layers.Dense(nodes, activation='relu')(encoder)
+    L1 = keras.regularizers.l1(lambtha)
     encoder = keras.layers.Dense(latent_dims, activation='relu',
                                  activity_regularizer=L1)(encoder)
 
     decoder_In = keras.Input(shape=(latent_dims,))
     decoder = decoder_In
     for nodes in hidden_layers[::-1]:
-        decoder = keras.layers.Dense(nodes, activation='relu',
-                                     activity_regularizer=L1)(decoder)
+        decoder = keras.layers.Dense(nodes, activation='relu')(decoder)
     decoder = keras.layers.Dense(input_dims, activation='sigmoid')(decoder)
 
     encoder = keras.Model(encoder_In, encoder)
