@@ -164,7 +164,7 @@ def compile_and_fit(model, window, patience=2):
 
 
 def forecasting(train, validation, test):
-    """"""
+    """Forecasting BTC."""
     window = WindowGenerator(input_width=24, label_width=24, shift=1,
                              train_df=train, val_df=validation, test_df=test,
                              label_columns=['Close'])
