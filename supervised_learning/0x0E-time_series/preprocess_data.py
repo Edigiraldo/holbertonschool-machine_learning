@@ -2,7 +2,7 @@
 """Function preprocess.
 csv_path = 'bitstampUSD_1-min_data_2012-01-01_to_2020-04-22.csv'
 """
-import pandas as pd
+# import pandas as pd
 
 
 def preprocess_data(csv_path):
