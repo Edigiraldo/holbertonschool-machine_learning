@@ -60,18 +60,7 @@ def ngram_bleu(references, sentence, n):
 
     Pn = sum(clipped_count.values()) / max(sum(n_gram_count_sent.values()), 1)
 
-    c = len(sentence)
-    r = min([len(ref) - c for ref in references]) + c
-
-    # Brevity penalty.
-    if c > r:
-        BP = 1
-    else:
-        BP = np.exp(1 - r / c)
-
-    BLEU_unigram = BP * Pn
-
-    return BLEU_unigram
+    return Pn
 
 
 def cumulative_bleu(references, sentence, n):
@@ -88,9 +77,23 @@ def cumulative_bleu(references, sentence, n):
 
     Returns: the cumulative n-gram BLEU score.
     """
-    n_bleu_scores = []
+    Pns = []
     for i in range(1, n + 1):
-        i_bleu = ngram_bleu(references, sentence, i)
-        n_bleu_scores.append(i_bleu)
+        Pn = ngram_bleu(references, sentence, i)
+        Pns.append(Pn)
 
-    return sum(n_bleu_scores) / n
+    c = len(sentence)
+    r = min([len(ref) - c for ref in references]) + c
+
+    # Brevity penalty.
+    if c > r:
+        BP = 1
+    else:
+        BP = np.exp(1 - r / c)
+
+    b = np.sum([np.log(Pns[i]) if Pns[i] != 0 else 0
+                for i in range(n)]) / n
+
+    cum_bleu = BP * np.exp(b)
+
+    return cum_bleu
