@@ -63,7 +63,7 @@ Create a class `SelfAttention` that inherits from `tensorflow.keras.layers.La
         -   `context` is a tensor of shape `(batch, units)` that contains the context vector for the decoder
         -   `weights` is a tensor of shape `(batch, input_seq_len, 1)` that contains the attention weights
 
-### 1\. Self Attention
+### 2\. Self Attention
 
 Create a class `SelfAttention` that inherits from `tensorflow.keras.layers.Layer` to calculate the attention for machine translation based on [this paper](https://intranet.hbtn.io/rltoken/YlDIODUFbkYQbRL3a5CwEQ "this paper"):
 
