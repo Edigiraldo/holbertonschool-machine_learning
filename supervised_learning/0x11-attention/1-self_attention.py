@@ -22,7 +22,7 @@ class SelfAttention(tf.keras.layers.Layer):
         self.U = tf.keras.layers.Dense(units)
         self.V = tf.keras.layers.Dense(1)
 
-    def __call__(self, s_prev, hidden_states):
+    def call(self, s_prev, hidden_states):
         """
         - s_prev is a tensor of shape (batch, units) containing the
           previous decoder hidden state.
