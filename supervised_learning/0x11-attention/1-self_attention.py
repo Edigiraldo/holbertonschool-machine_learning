@@ -1,4 +1,4 @@
-#!/usr/bin env python3
+#!/usr/bin/env python3
 """Class SelfAttention."""
 import tensorflow as tf
 
