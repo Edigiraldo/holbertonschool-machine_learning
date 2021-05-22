@@ -1,4 +1,4 @@
-#!/usr/bin env python3
+#!/usr/bin/env python3
 """Function sdp_attention."""
 import tensorflow as tf
 

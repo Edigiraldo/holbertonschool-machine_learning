@@ -1,4 +1,4 @@
-#!/usr/bin env python3
+#!/usr/bin/env python3
 """Class MultiHeadAttention."""
 import tensorflow as tf
 sdp_attention = __import__('5-sdp_attention').sdp_attention
