@@ -18,6 +18,7 @@ class SelfAttention(tf.keras.layers.Layer):
         - units is an integer representing the number of hidden units in
           the alignment model.
         """
+        super().__init__()
         self.W = tf.keras.layers.Dense(units)
         self.U = tf.keras.layers.Dense(units)
         self.V = tf.keras.layers.Dense(1)
