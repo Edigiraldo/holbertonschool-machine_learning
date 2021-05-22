@@ -49,7 +49,7 @@ class Transformer(tf.keras.Model):
         target_vocab) containing the transformer output.
         """
         enc_out = self.encoder(inputs, training, encoder_mask)
-        dec_out = self.decoder(target, enc_output, training,
+        dec_out = self.decoder(target, enc_out, training,
                                look_ahead_mask, decoder_mask)
         out = self.linear(dec_out)
 
