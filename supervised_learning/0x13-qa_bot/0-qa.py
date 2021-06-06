@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """question_answer function."""
+import tensorflow as tf
+import tensorflow_hub as hub
+from transformers import BertTokenizer
 
 
 def question_answer(question, reference):
