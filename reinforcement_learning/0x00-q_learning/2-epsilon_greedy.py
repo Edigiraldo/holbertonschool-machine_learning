@@ -1,4 +1,4 @@
-#!/usr/bin/env/python3
+#!/usr/bin/env python3
 """Function epsilon_greedy."""
 import numpy as np
 

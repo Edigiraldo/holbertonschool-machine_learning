@@ -1,4 +1,4 @@
-#!/usr/bin/env/python3
+#!/usr/bin/env python3
 """Function q_init."""
 import gym
 import numpy as np
