@@ -16,7 +16,7 @@ def epsilon_greedy(Q, state, epsilon):
     n_actions = Q.shape[1]
 
     random = np.random.uniform(0, 1)
-    if epsilon > random:  # explore.
+    if epsilon >= random:  # explore.
         action_idx = np.random.randint(0, n_actions)
     else:  # exploit.
         action_idx = Q.argmax(axis=1)[state]
