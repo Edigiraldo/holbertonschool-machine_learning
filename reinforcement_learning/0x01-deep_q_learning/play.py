@@ -6,43 +6,17 @@ import gym
 from PIL import Image
 
 import keras as K
-from keras.models import Sequential
 from keras.optimizers import Adam
-from keras.layers import Dense, Activation, Flatten, Convolution2D, Permute
 
 from rl.agents.dqn import DQNAgent
-from rl.policy import LinearAnnealedPolicy, GreedyQPolicy
+from rl.policy import GreedyQPolicy
 from rl.memory import SequentialMemory
 from rl.core import Processor
-from rl.callbacks import FileLogger, ModelIntervalCheckpoint
 
 # number of context images for the model to evaluate current state.
 window_length = 4
 # size of resized images for keras model.
 input_shape = (84, 84)
-
-def create_model(window_length, input_shape):
-    """
-    Function to create model to be used as policy.
-    """
-    model_inp = (window_length,) + input_shape
-
-    model = Sequential()
-
-    model.add(Permute((2, 3, 1), input_shape=model_inp))
-    model.add(Convolution2D(32, (8, 8), strides=(4, 4)))
-    model.add(Activation('relu'))
-    model.add(Convolution2D(64, (4, 4), strides=(2, 2)))
-    model.add(Activation('relu'))
-    model.add(Convolution2D(64, (3, 3), strides=(1, 1)))
-    model.add(Activation('relu'))
-    model.add(Flatten())
-    model.add(Dense(512))
-    model.add(Activation('relu'))
-    model.add(Dense(nb_actions))
-    model.add(Activation('linear'))
-
-    return model
 
 
 class AtariProcessor(Processor):
