@@ -20,6 +20,7 @@ window_length = 4
 # size of resized images for keras model.
 input_shape = (84, 84)
 
+
 def create_model(window_length, input_shape):
     """
     Function to create model to be used as policy.
