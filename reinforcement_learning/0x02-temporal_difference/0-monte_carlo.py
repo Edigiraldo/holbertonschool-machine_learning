@@ -21,32 +21,34 @@ def monte_carlo(env, V, policy, episodes=5000, max_steps=100,
     Returns: V, the updated value estimate.
     """
     env.reset()
+    space_n = env.observation_space.n
     discount_factor = gamma ** np.arange(max_steps)
 
     for _ in range(episodes):
         states = []  # State at ith timestep.
-        rewards = [] # Reward got passing from states[i] state to next state.
+        rewards = []  # Reward got passing from states[i] state to next state.
 
         init_state = env.reset()
         states.append(init_state)
-        for step in range(max_steps):
+        for _ in range(max_steps):
             action = policy(states[-1])
             state, reward, finished, _ = env.step(action)
 
             states.append(state)
             rewards.append(reward)
+
             if finished:
                 break
-        print(rewards)
-        print(states)
-
-        for state in set(states):
-            idx = states.index(state)
-            rews_from_state = np.array(rewards[idx:])
+        for idx in range(len(states)):
+            state = states[idx]
+            # If last state (There is no reward from here).
+            if idx == len(rewards):
+                break
+            rews_from_state = np.array(rewards)
             num_rews = rews_from_state.shape[0]
             disc_facts = discount_factor[:num_rews]
             disc_reward = (rews_from_state * disc_facts).sum()
 
-            V[state] = V[state] +  alpha * (disc_reward - V[state])
+            V[state] = V[state] + alpha * (disc_reward - V[state])
 
     return V
