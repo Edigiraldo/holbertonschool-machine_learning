@@ -23,7 +23,7 @@ def train(env, nb_episodes, alpha=0.000045, gamma=0.98, show_result=False):
 
     scores = []
     for episode in range(nb_episodes * 10):
-        state = env.reset()[None,:]
+        state = env.reset()[None, :]
         gradients = []
         rewards = []
         score = 0
