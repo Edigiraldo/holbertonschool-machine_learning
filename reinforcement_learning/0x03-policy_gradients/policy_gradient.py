@@ -38,7 +38,7 @@ def policy_gradient(state, weight):
 
     # policy gradient -> soft(j) * (delta(i,j) - soft(i))
     grad_policy = -actions_prob[0, action] * actions_prob
-    grad_policy[0, action] += 1
+    grad_policy[0, action] += actions_prob[0, action]
 
     # gradient(log(policy)) -> grad(policy) / prob(action)
     grad_log_policy = grad_policy / actions_prob[0, action]  # (1, actions)
