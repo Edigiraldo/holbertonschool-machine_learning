@@ -22,7 +22,7 @@ def train(env, nb_episodes, alpha=0.000045, gamma=0.98, show_result=False):
     policy_weights = np.random.rand(n_obs, n_actions)
 
     scores = []
-    for episode in range(nb_episodes * 10):
+    for episode in range(nb_episodes):
         state = env.reset()[None, :]
         gradients = []
         rewards = []
