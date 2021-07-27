@@ -22,7 +22,7 @@ if __name__ == '__main__':
         time_now = time.time()
         minutes = int((ratelimit - time_now) / 60)
 
-        print(f"Reset in {minutes} min")
+        print('Reset in {} min'.format(minutes))
 
     elif status_code == 404:
         print("Not found")
