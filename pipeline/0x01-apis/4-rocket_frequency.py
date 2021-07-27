@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
     rocket_launches = []
     for rocket_id in rocket_ids_launches.keys():
-        rocket_url = f'https://api.spacexdata.com/v4/rockets/{rocket_id}'
+        rocket_url = 'https://api.spacexdata.com/v4/rockets/' + rocket_id
         rocket_response = requests.get(rocket_url)
         rocket_name = rocket_response.json()['name']
         num_launches = rocket_ids_launches[rocket_id]
@@ -29,4 +29,4 @@ if __name__ == '__main__':
     rocket_launches.sort(key=lambda tup: tup[1], reverse=True)
 
     for rocket_name, num_launches in rocket_launches:
-        print(f'{rocket_name}: {num_launches}')
+        print('{}: {}'.format(rocket_name, num_launches))
