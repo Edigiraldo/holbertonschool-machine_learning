@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
+"""Script to request Github API for users location."""
 import requests
 from sys import argv
 import time
-"""Script to request Github API for users location."""
 
 
 if __name__ == '__main__':
