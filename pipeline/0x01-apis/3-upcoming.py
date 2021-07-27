@@ -26,14 +26,15 @@ if __name__ == '__main__':
     rocket_id = soonest_launch['rocket']
     launchpad_id = soonest_launch['launchpad']
 
-    rocket_url = f'https://api.spacexdata.com/v4/rockets/{rocket_id}'
+    rocket_url = 'https://api.spacexdata.com/v4/rockets/' + rocket_id
     rocket_response = requests.get(rocket_url)
     rocket_name = rocket_response.json()['name']
 
-    launchpad_url = f'https://api.spacexdata.com/v4/launchpads/{launchpad_id}'
+    launchpad_url = 'https://api.spacexdata.com/v4/launchpads/' + launchpad_id
     launchpad_response = requests.get(launchpad_url)
     launchpad_name = launchpad_response.json()['name']
     launchpad_locality = launchpad_response.json()['locality']
 
-    print(f'{launch_name} ({local_time_date}) {rocket_name} -' +
-          f' {launchpad_name} ({launchpad_locality})')
+    print('{} ({}) {} - {} ({})'.format(launch_name, local_time_date,
+                                        rocket_name, launchpad_name,
+                                        launchpad_locality))
