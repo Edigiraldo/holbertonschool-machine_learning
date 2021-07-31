@@ -5,5 +5,5 @@ BEGIN
   DECLARE avg_score int;
   SET avg_score = (SELECT AVG(score) FROM corrections WHERE user_id = u_id);
   UPDATE users SET average_score = avg_score WHERE id = u_id;
-END$$
+END $$
 DELIMITER ;
