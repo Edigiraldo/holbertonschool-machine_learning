@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Function ."""
+"""Function schools_by_topic"""
 
 
 def schools_by_topic(mongo_collection, topic):
@@ -15,4 +15,5 @@ def schools_by_topic(mongo_collection, topic):
     results = mongo_collection.find({"topics": {"$all": [topic]}})
     for result in results:
         l_results.append(result)
+
     return l_results
